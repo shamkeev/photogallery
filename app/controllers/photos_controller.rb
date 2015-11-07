@@ -10,7 +10,7 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-    @comments = Comment.where(photo_id: @photo)
+    @comments = Comment.where(photo_id: @photo).order('created_at DESC')
     calculate_rating @photo
     @comment =Comment.new
   end
