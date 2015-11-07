@@ -1,9 +1,22 @@
+<div class="row">
+  <h2 style="text-align: left"><%= @photo.title %></h2>
 
-<p>
-  <strong>Title:</strong>
-  <%= @photo.title %>
-  <%= image_tag @photo.image.url(:original) %>
-</p>
+  <div class="img-photo-pg-block">
+    <%= image_tag @photo.image.url(:original) %>
+  </div>
+  <p>Average rating: <strong><%= @rating %></strong></p>
+</div>
+<h3>Add comment:</h3>
+<div class="row">
+  <%= render 'comments/form' %>
+</div>
+<h3>Comments:</h3>
+<% @comments.each do |comment| %>
+    <div class="row">
+      <div class="comment">
+        <p>By: <strong><%= comment.user.name %>, Score: <%= comment.rating %></strong></p>
+        <p><%= comment.text %></p>
+      </div>
+    </div>
+<% end %>
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
