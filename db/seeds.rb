@@ -14,18 +14,21 @@ users = []
   users.push user
 end
 
+photos = []
 20.times do
   photo = Photo.new
   photo.title = Faker::Address.country
   photo.user = users.sample
-  photo.image = File.open(File.join(Rails.root, "/app/assets/images/fixtures/#{rand(1..8)}.jpg"))
+  photo.image = File.open(File.join(Rails.root, "/app/assets/images/fixtures/#{rand(1..20)}.jpg"))
   photo.save
+  photos.push photo
 end
 
 70.times do
   comment = Comment.new
   comment.text = Faker::Hacker.say_something_smart
-  comment.photo_id = rand(1..20)
-  comment.user_id = rand(1..5)
+  comment.photo = photos.sample
+  comment.user = users.sample
+  comment.rating = rand(1..5)
   comment.save
 end
