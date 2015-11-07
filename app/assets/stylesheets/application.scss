@@ -1,6 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.comment{
+  border-top: 1px solid #CBDCDB;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
 .photo-block{
   margin-bottom:10px;
   border-radius:5px;
@@ -24,6 +30,14 @@
   margin: auto;
   min-height: 100%;
   min-width: 100%;
+}
+
+.img-photo-pg-block{
+  margin-bottom: 10px;
+}
+
+.img-photo-pg-block img{
+  max-width: 100%;
 }
 
 .alert-alert{
@@ -85,3 +99,4 @@
   height: 1%; }
 *:first-child + html .digg_pagination {
   overflow: hidden; }
+
