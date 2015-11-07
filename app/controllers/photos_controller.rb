@@ -1,15 +1,24 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :set_photo, only: [:show, :edit, :destroy]
 
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all
+    @photos = Photo.paginate(:page => params[:page], :per_page => 12).order('created_at DESC')
   end
 
   # GET /photos/1
   # GET /photos/1.json
   def show
+    @comments = Comment.where(photo_id: @photo)
+    calculate_rating @photo
+    @comment =Comment.new
+  end
+
+  def calculate_rating(photo)
+    comments = Comment.where(photo_id: photo)
+
+    @rating = comments.average(:rating) # => 35.8
   end
 
   # GET /photos/new
@@ -24,30 +33,14 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
-    @photo = Photo.new(photo_params)
+    @photo = current_user.photos.build(photo_params)
 
-    respond_to do |format|
-      if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
-        format.json { render :show, status: :created, location: @photo }
-      else
-        format.html { render :new }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /photos/1
-  # PATCH/PUT /photos/1.json
-  def update
-    respond_to do |format|
-      if @photo.update(photo_params)
-        format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
-        format.json { render :show, status: :ok, location: @photo }
-      else
-        format.html { render :edit }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
-      end
+    if @photo.save
+      redirect_to show_user_path(current_user)
+      flash[:success] = 'Successfully created a new photo'
+    else
+      flash[:danger] = 'Oops! Something is wrong!'
+      render 'new'
     end
   end
 
@@ -55,10 +48,9 @@ class PhotosController < ApplicationController
   # DELETE /photos/1.json
   def destroy
     @photo.destroy
-    respond_to do |format|
-      format.html { redirect_to photos_url, notice: 'Photo was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+
+    redirect_to show_user_path(current_user)
+    flash[:info] = 'Tweet was removed'
   end
 
   private
