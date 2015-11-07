@@ -6,15 +6,19 @@
   </div>
   <p>Average rating: <strong><%= @rating %></strong></p>
 </div>
-<h3>Add comment:</h3>
-<div class="row">
-  <%= render 'comments/form' %>
-</div>
+<% if user_signed_in? %>
+    <h3>Add comment:</h3>
+    <div class="row">
+      <%= render 'comments/form' %>
+    </div>
+<% end %>
+
 <h3>Comments:</h3>
 <% @comments.each do |comment| %>
     <div class="row">
       <div class="comment">
         <p>By: <strong><%= comment.user.name %>, Score: <%= comment.rating %></strong></p>
+
         <p><%= comment.text %></p>
       </div>
     </div>
