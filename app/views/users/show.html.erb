@@ -1,0 +1,28 @@
+<div class="row">
+  <h2><%= @user.name %>'s profile</h2>
+
+  <% if current_user == @user %>
+      Add a new photo to my gallery: <%= link_to 'New Photo', new_photo_path, class:'btn btn-primary' %>
+  <% end %>
+</div>
+
+
+<% @photos.each do |photo| %>
+    <div class="col-xs-6 col-md-3">
+      <div class="photo-block">
+        <div class="photo-image">
+          <%= link_to (image_tag image_path photo.image.url(:medium)), photo %>
+        </div>
+
+        <caption>
+          <h3><%= link_to photo.title, photo %></h3>
+        </caption>
+        <% if current_user == photo.user %>
+            <div class="photo-actions">
+              <td><%= link_to 'Delete this photo', photo, method: :delete, data: {confirm: 'Are you sure?'},
+                              class: 'btn btn-danger' %></td>
+            </div>
+        <% end %>
+      </div>
+    </div>
+<% end %>
