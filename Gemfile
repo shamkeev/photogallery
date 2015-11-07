@@ -55,5 +55,5 @@ gem 'paperclip'
 
 gem 'will_paginate'
 
-
+gem 'faker'
 
