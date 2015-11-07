@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 
   root 'photos#index'
 
-  resources :photos
-  resources :comments
-
+  resources :photos, :shallow => true do
+    resources :comments
+  end
 
 end
