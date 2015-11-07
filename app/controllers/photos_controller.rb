@@ -50,7 +50,7 @@ class PhotosController < ApplicationController
     @photo.destroy
 
     redirect_to show_user_path(current_user)
-    flash[:info] = 'Tweet was removed'
+    flash[:info] = 'Photo was removed'
   end
 
   private
