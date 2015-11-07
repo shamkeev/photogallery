@@ -1,6 +1,11 @@
 class Photo < ActiveRecord::Base
 
+  belongs_to :user
+
+  has_many :comments
+
   validates :title, presence: true, length:{maximum: 50}
+  validates :image, presence: true
 
   has_attached_file :image,
                     styles: { medium: '300x300>', thumb: '100x100>'},
