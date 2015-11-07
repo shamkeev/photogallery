@@ -1,2 +1,27 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.photo-block{
+  margin-bottom:10px;
+  border-radius:5px;
+  padding: 10px;
+}
+
+.photo-image{
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  margin: auto;
+  position: relative;
+}
+
+.photo-image img{
+  position:absolute;
+  left: -100%;
+  right: -100%;
+  top: -100%;
+  bottom: -100%;
+  margin: auto;
+  min-height: 100%;
+  min-width: 100%;
+}
