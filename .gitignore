@@ -17,3 +17,6 @@
 /tmp
 
 .idea
+
+/public/*
+!/public/images
