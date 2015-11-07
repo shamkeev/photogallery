@@ -45,3 +45,15 @@ group :development do
   gem 'spring'
 end
 
+gem 'activeadmin', '~> 1.0.0.pre2'
+
+gem 'devise'
+
+gem 'bootstrap-sass'
+
+gem 'paperclip'
+
+gem 'will_paginate'
+
+
+
